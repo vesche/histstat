@@ -6,14 +6,13 @@
 
 from datetime import datetime
 from optparse import OptionParser
-from os import name
 from psutil import net_connections, Process
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 from time import sleep
 try:
     from os import geteuid
-except:
-    from ctypes.windll.shell32 import IsUserAnAdmin
+except ImportError:
+    from ctypes import *
 
 
 class Histstat(object):
@@ -43,8 +42,8 @@ class Histstat(object):
         try:
             if geteuid() == 0:
                 self.root_check = True
-        except:
-            if IsUserAnAdmin() == 0:
+        except NameError:
+            if windll.shell32.IsUserAnAdmin() == 0:
                 self.root_check = True
         if not self.root_check:
             header += "(Not all process information could be determined, run" \
