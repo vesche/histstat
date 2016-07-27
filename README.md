@@ -2,6 +2,8 @@
 
 Histstat is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security engineers to easily view connections on a system as they occur. In a world filled with noisy computers, Histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
 
+**Note:** On Windows, verbose output will not work unless you're running as NT AUTHORITY\SYSTEM. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx), `psexec -i -s cmd.exe`.
+
 ### Requirements
 * `Python 2.7`
 * `psutil`
