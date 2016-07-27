@@ -32,6 +32,7 @@ class Histstat(object):
             (AF_INET, SOCK_DGRAM): 'udp',
             (AF_INET6, SOCK_DGRAM): 'udp6',
         }
+        self.root_check = False
 
         if self.verbose:
             self.log_format += " {:<12.12} {}"
@@ -40,12 +41,12 @@ class Histstat(object):
     def histinit(self):
         header = ''
         try:
-            if geteuid() != 0:
-                root = False
+            if geteuid() == 0:
+                self.root_check = True
         except:
-            if IsUserAnAdmin() != 0:
-                root = False
-        if not root:
+            if IsUserAnAdmin() == 0:
+                self.root_check = True
+        if not self.root_check:
             header += "(Not all process information could be determined, run" \
             " as root to see everything.)\n"
         header += self.log_format.format(*self.fields)
