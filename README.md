@@ -1,6 +1,6 @@
 # Histstat
 
-Histstat is a command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security engineers to easily view connections on a system as they occur. In a world filled with noisy computers, Histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
+Histstat is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security engineers to easily view connections on a system as they occur. In a world filled with noisy computers, Histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
 
 ### Requirements
 * `Python 2.7`
