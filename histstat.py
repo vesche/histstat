@@ -5,11 +5,15 @@
 # https://github.com/vesche/histstat
 
 from datetime import datetime
-from os import geteuid
 from optparse import OptionParser
+from os import name
 from psutil import net_connections, Process
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 from time import sleep
+try:
+    from os import geteuid
+except:
+    from ctypes.windll.shell32 import IsUserAnAdmin
 
 
 class Histstat(object):
@@ -18,8 +22,8 @@ class Histstat(object):
         self.interval = interval
         self.log = log
         self.verbose = verbose
-        self.log_format = "{:<5} {:<15} {:<5} {:<15} {:<5} {:<11} {:<5} " \
-        "{:<12} {:<8} {:<8}"
+        self.log_format = "{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} " \
+        "{:<5} {:<12.12} {:<8} {:<8}"
         self.fields = ["proto", "laddr", "lport", "raddr", "rport", "status",
         "pid", "pname", "time", "date"]
         self.protocols = {
@@ -30,12 +34,18 @@ class Histstat(object):
         }
 
         if self.verbose:
-            self.log_format += " {:<12} {:<20}"
+            self.log_format += " {:<12.12} {}"
             self.fields += ["user", "command"]
 
     def histinit(self):
         header = ''
-        if geteuid() != 0:
+        try:
+            if geteuid() != 0:
+                root = False
+        except:
+            if IsUserAnAdmin() != 0:
+                root = False
+        if not root:
             header += "(Not all process information could be determined, run" \
             " as root to see everything.)\n"
         header += self.log_format.format(*self.fields)
