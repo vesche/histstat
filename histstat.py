@@ -82,8 +82,11 @@ class Histstat(object):
         if c.pid:
             pname, pid = Process(c.pid).name(), str(c.pid)
         if c.pid and self.verbose:
-            user = Process(c.pid).username()
-            command = ' '.join(Process(c.pid).cmdline())
+            try:
+                user = Process(c.pid).username()
+                command = ' '.join(Process(c.pid).cmdline())
+            except:
+                pass
         if c.status != "NONE":
             status = c.status
 
