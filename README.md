@@ -28,7 +28,7 @@ Options:
   -l LOG, --log=LOG     log output to a text file
   -v, --verbose         verbose output
 
-$ sudo python2 histstat.py -v -l log.txt
+$ sudo python histstat.py -v -l log.txt
 proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
 tcp   192.168.1.137   58822 172.217.1.206   443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
 tcp   192.168.1.137   60176 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
