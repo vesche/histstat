@@ -28,22 +28,35 @@ Options:
   -l LOG, --log=LOG     log output to a text file
   -v, --verbose         verbose output
 
-$ sudo python histstat.py -v -l log.txt
-laddr           lport raddr           rport status      pid   pname        time     date     user         command             
-0.0.0.0         22    *               *     LISTEN      194   sshd         23:34:15 16-07-26 root         /usr/bin/sshd -D    
-192.168.1.181   41626 54.192.39.188   443   ESTABLISHED 6055  firefox      23:34:15 16-07-26 vesche       /usr/lib/firefox/firefox
-192.168.1.181   45892 216.58.218.238  443   TIME_WAIT   -     -            23:34:15 16-07-26 -            -                   
-::              22    *               *     LISTEN      194   sshd         23:34:15 16-07-26 root         /usr/bin/sshd -D    
-192.168.1.181   37470 52.88.118.150   443   ESTABLISHED 6055  firefox      23:34:15 16-07-26 vesche       /usr/lib/firefox/firefox
-192.168.1.181   37760 54.192.36.129   443   ESTABLISHED 6055  firefox      23:34:15 16-07-26 vesche       /usr/lib/firefox/firefox
-192.168.1.181   46732 216.58.218.238  80    ESTABLISHED 6055  firefox      23:34:15 16-07-26 vesche       /usr/lib/firefox/firefox
-192.168.1.181   46734 216.58.218.238  80    TIME_WAIT   -     -            23:34:15 16-07-26 -            -                   
-0.0.0.0         68    *               *     NONE        1117  dhcpcd       23:34:15 16-07-26 root         /usr/bin/dhcpcd -4 -q -t 30 -L wlp1s0
-0.0.0.0         1337  *               *     LISTEN      6293  nc           23:34:21 16-07-26 vesche       /usr/bin/netcat -l -p 1337
-0.0.0.0         8080  *               *     LISTEN      6315  python2      23:34:23 16-07-26 root         /usr/bin/python2.7 -m SimpleHTTPServer 8080
-192.168.1.181   52354 192.168.1.179   22    ESTABLISHED 6553  ssh          23:34:50 16-07-26 vesche       /usr/bin/ssh vesche@192.168.1.179
-192.168.1.181   37470 52.88.118.150   443   TIME_WAIT   -     -            23:35:10 16-07-26 -            -                   
-192.168.1.181   8080  192.168.1.179   39364 TIME_WAIT   -     -            23:35:28 16-07-26 -            -                   
+$ sudo python2 histstat.py -v -l log.txt
+proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
+tcp   192.168.1.137   58822 172.217.1.206   443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
+tcp   192.168.1.137   60176 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
+tcp   192.168.1.137   59798 45.58.74.36     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   40994 108.160.173.132 443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   40986 108.160.173.132 443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   41752 173.194.206.155 443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
+tcp   192.168.1.137   48396 198.41.209.142  443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   40978 108.160.173.132 443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   60130 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
+tcp   192.168.1.137   40194 45.58.70.36     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   32894 198.41.209.151  443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   60154 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
+tcp   192.168.1.137   57808 45.58.70.4      443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   0.0.0.0         22    *               *     LISTEN      198   sshd         10:41:45 16-07-28 root         /usr/bin/sshd -D
+tcp   192.168.1.137   39732 199.16.156.6    443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
+tcp   192.168.1.137   57816 45.58.70.4      443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   35508 104.16.107.25   443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   49674 198.41.208.122  443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   34076 162.125.4.1     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+udp   0.0.0.0         68    *               *     -           362   dhcpcd       10:41:45 16-07-28 root         dhcpcd -4 -q -t 30 -L wlp1s0
+tcp   192.168.1.137   49752 104.16.2.9      443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   192.168.1.137   40182 45.58.70.36     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
+tcp   0.0.0.0         2002  *               *     LISTEN      31327 nc           10:42:03 16-07-28 vesche       nc -l -p 2002
+tcp   192.168.1.137   39600 10.4.0.11       22    ESTABLISHED 31975 ssh          10:42:59 16-07-28 vesche       ssh root@10.4.0.11
+tcp   192.168.1.137   39600 10.4.0.11       22    TIME_WAIT   -     -            10:43:05 16-07-28 -            -
+tcp   0.0.0.0         8080  *               *     LISTEN      32490 python2      10:43:49 16-07-28 root         python2 -m SimpleHTTPServer 8080
+tcp   192.168.1.137   8080  192.168.1.137   45162 TIME_WAIT   -     -            10:44:12 16-07-28 -            -
 ```
 
 ### Todo
