@@ -80,7 +80,10 @@ class Histstat(object):
         if c.raddr:
             raddr, rport = c.raddr
         if c.pid:
-            pname, pid = Process(c.pid).name(), str(c.pid)
+            try:
+                pname, pid = Process(c.pid).name(), str(c.pid)
+            except:
+                pass
         if c.pid and self.verbose:
             try:
                 user = Process(c.pid).username()
