@@ -22,7 +22,7 @@ class Histstat(object):
         self.log = log
         self.verbose = verbose
         self.log_format = "{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} " \
-        "{:<5} {:<12.12} {:<8} {:<8}"
+        "{:<5} {:<20.20} {:<8} {:<8}"
         self.fields = ["proto", "laddr", "lport", "raddr", "rport", "status",
         "pid", "pname", "time", "date"]
         self.protocols = {
@@ -34,7 +34,7 @@ class Histstat(object):
         self.root_check = False
 
         if self.verbose:
-            self.log_format += " {:<12.12} {}"
+            self.log_format += " {:<20.20} {}"
             self.fields += ["user", "command"]
 
     def histinit(self):
