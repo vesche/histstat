@@ -125,7 +125,7 @@ def command_line_runner():
     
     histinit()
     histmain(interval)
-    
+
 
 if __name__ == "__main__":
     command_line_runner()

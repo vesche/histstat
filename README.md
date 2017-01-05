@@ -2,33 +2,32 @@
 
 Histstat is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security engineers to easily view connections on a system as they occur. In a world filled with noisy computers, Histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
 
-**Note:** On Windows, verbose output will not work unless you're running as NT AUTHORITY\SYSTEM. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx), `psexec -i -s cmd.exe`.
+**Note:** On Windows, detailed process informatino will not display unless you're running as NT AUTHORITY\SYSTEM. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator.
 
 ### Requirements
-* `Python 2.7`
+* `Python 2 or 3`
 * `psutil`
 
 ### Install
 ```
-pip install psutil
+sudo pip install psutil
 git clone https://github.com/vesche/histstat && cd histstat
 ```
 
 ### Example Usage
 ```
-$ python histstat.py -h
-Usage: histstat - history for netstat
-       https://github.com/vesche/histstat
+$ python histstat.py --help
+usage: histstat.py [-h] [-i INTERVAL] [-l LOG]
 
-Options:
-  --version             show program's version number and exit
+history for netstat
+
+optional arguments:
   -h, --help            show this help message and exit
-  -i INTERVAL, --interval=INTERVAL
-                        specify update interval in seconds (default: 1 sec)
-  -l LOG, --log=LOG     log output to a text file
-  -v, --verbose         verbose output
+  -i INTERVAL, --interval INTERVAL
+                        specify update interval in seconds
+  -l LOG, --log LOG     log output to a text file
 
-$ sudo python histstat.py -v -l log.txt
+$ sudo python histstat.py -l log.txt
 proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
 tcp   192.168.1.137   58822 172.217.1.206   443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
 tcp   192.168.1.137   60176 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
@@ -61,7 +60,7 @@ tcp   192.168.1.137   8080  192.168.1.137   45162 TIME_WAIT   -     -           
 
 ### Todo
 * output to csv
-* verbosity options
+* prettify option
 
 ### Thanks
 Huge thanks to Giampaolo Rodola' (giampaolo) and all the contributers of [psutil](https://github.com/giampaolo/psutil) for the amazing open source library that this project relies upon completely.

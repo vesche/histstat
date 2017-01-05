@@ -4,6 +4,8 @@
 # histstat - history for netstat
 # https://github.com/vesche/histstat
 
+# This code is outdated and has been refactored.
+
 from datetime import datetime
 from optparse import OptionParser
 from psutil import net_connections, Process
