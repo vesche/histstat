@@ -17,7 +17,7 @@ git clone https://github.com/vesche/histstat && cd histstat
 ### Example Usage
 ```
 $ python histstat.py --help
-usage: histstat.py [-h] [-i INTERVAL] [-l LOG]
+usage: histstat.py [-h] [-i INTERVAL] [-l LOG] [-p]
 
 history for netstat
 
@@ -26,8 +26,7 @@ optional arguments:
   -i INTERVAL, --interval INTERVAL
                         specify update interval in seconds
   -l LOG, --log LOG     log output to a text file
-  -p PRETTIFY, --prettify PRETTIFY
-                        prettify output
+  -p, --prettify        prettify output
 
 $ sudo python histstat.py -p -l log.txt
 proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
