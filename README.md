@@ -1,11 +1,11 @@
-# Histstat
+# histstat
 
-Histstat is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security engineers to easily view connections on a system as they occur. In a world filled with noisy computers, Histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
+This is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security analysts to easily view connections on a system **as they occur**. In a world filled with noisy computers, histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It will display useful information about network connections that utilities like netstat typically won't give you such as what time the connection was made, the exact command that created the connection, and the user that connection was made by. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
 
-**Note:** On Windows, detailed process informatino will not display unless you're running as NT AUTHORITY\SYSTEM. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator.
+**Note:** On Windows, detailed process information will not display unless you're running as `NT AUTHORITY\SYSTEM`. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator and then run histstat.
 
 ### Requirements
-* `Python 2 or 3`
+* `Python 2.x or 3.x`
 * `psutil`
 
 ### Install
@@ -26,8 +26,10 @@ optional arguments:
   -i INTERVAL, --interval INTERVAL
                         specify update interval in seconds
   -l LOG, --log LOG     log output to a text file
+  -p PRETTIFY, --prettify PRETTIFY
+                        prettify output
 
-$ sudo python histstat.py -l log.txt
+$ sudo python histstat.py -p -l log.txt
 proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
 tcp   192.168.1.137   58822 172.217.1.206   443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
 tcp   192.168.1.137   60176 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
@@ -57,10 +59,6 @@ tcp   192.168.1.137   39600 10.4.0.11       22    TIME_WAIT   -     -           
 tcp   0.0.0.0         8080  *               *     LISTEN      32490 python2      10:43:49 16-07-28 root         python2 -m SimpleHTTPServer 8080
 tcp   192.168.1.137   8080  192.168.1.137   45162 TIME_WAIT   -     -            10:44:12 16-07-28 -            -
 ```
-
-### Todo
-* output to csv
-* prettify option
 
 ### Thanks
 Huge thanks to Giampaolo Rodola' (giampaolo) and all the contributers of [psutil](https://github.com/giampaolo/psutil) for the amazing open source library that this project relies upon completely.

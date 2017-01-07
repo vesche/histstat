@@ -29,28 +29,31 @@ PROTOCOLS = {
     (AF_INET,  SOCK_DGRAM):  'udp',
     (AF_INET6, SOCK_DGRAM):  'udp6'
 }
-FIELDS = [ "proto", "laddr", "lport", "raddr", "rport", "status", "pid",
-           "pname", "time", "date", "user", "command" ]
-#PRETTIFY = '{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} {:<5} {:<20.20} ' \
-#           '{:<8} {:<8} {:<20.20} {}'
+FIELDS = [ 'proto', 'laddr', 'lport', 'raddr', 'rport', 'status', 'pid',
+           'pname', 'time', 'date', 'user', 'command' ]
+P_FIELDS = '{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} {:<5} {:<20.20} ' \
+           '{:<8} {:<8} {:<20.20} {}'
 
 
 def histinit():
     header = ''
     root_check = False
-    
-    if PLATFORM == 'NIX':
+
+    if PLATFORM == 'nix':
         if geteuid() == 0:
             root_check = True
-    elif PLATFORM == 'WIN':
+    elif PLATFORM == 'win':
         if windll.shell32.IsUserAnAdmin() == 0:
             root_check = True
-            
+
     if not root_check:
         header += '(Not all process information could be determined, run' \
                   ' at a higher privilege level to see everything.)\n'
-    
-    header += '\t'.join(FIELDS)
+
+    if prettify:
+        header += P_FIELDS.format(*FIELDS)
+    else:
+        header += '\t'.join(FIELDS)
     histlog(header)
 
 
@@ -77,7 +80,7 @@ def process_conn(c):
     raddr = rport = '*'
     status = pid = pname = user = command = '-'
     laddr, lport = c.laddr
-    
+
     if c.raddr:
         raddr, rport = c.raddr
     if c.pid:
@@ -92,14 +95,17 @@ def process_conn(c):
 
     cfields = [ proto, laddr, lport, raddr, rport, status, pid, pname,
                 time[:8], date[2:], user, command ]
-    
-    line = '\t'.join(map(str, cfields))
+
+    if prettify:
+        line = P_FIELDS.format(*cfields)
+    else:
+        line = '\t'.join(map(str, cfields))
     return line
 
 
 def histlog(line):
     print(line)
-    
+
     if log:
         with open(log, 'a') as f:
             f.write(line + '\n')
@@ -112,20 +118,27 @@ def get_parser():
                         default=1, type=float)
     parser.add_argument('-l', '--log', help='log output to a text file',
                         default=False, type=str)
+    parser.add_argument('-p', '--prettify', help='prettify output',
+                        default=False, action='store_true')
+
     return parser
 
 
-def command_line_runner():
+def main():
     parser = get_parser()
     args = vars(parser.parse_args())
-    
+
     interval = args['interval']
+
     global log
     log = args['log']
-    
+
+    global prettify
+    prettify = args['prettify']
+
     histinit()
     histmain(interval)
 
 
-if __name__ == "__main__":
-    command_line_runner()
+if __name__ == '__main__':
+    main()
