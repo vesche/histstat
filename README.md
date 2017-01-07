@@ -62,3 +62,5 @@ tcp   192.168.1.137   8080  192.168.1.137   45162 TIME_WAIT   -     -           
 
 ### Thanks
 Huge thanks to Giampaolo Rodola' (giampaolo) and all the contributers of [psutil](https://github.com/giampaolo/psutil) for the amazing open source library that this project relies upon completely.
+
+Also, thanks to gleitz and his project [howdoi](https://github.com/gleitz/howdoi), in my refactor of histstat I modeled my code around his command line tool as the code is exceptionally clean and readable.
