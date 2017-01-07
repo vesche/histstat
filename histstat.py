@@ -12,7 +12,7 @@ import sys
 
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
-if sys.platform.startswith('linux'):
+if sys.platform.startswith('linux') or sys.platform == 'darwin':
     PLATFORM = 'nix'
     from os import geteuid
 elif sys.platform.startswith('win'):
