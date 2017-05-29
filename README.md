@@ -4,20 +4,16 @@ This is a cross-platform command line tool for obtaining live, rudimentary netwo
 
 **Note:** On Windows, detailed process information will not display unless you're running as `NT AUTHORITY\SYSTEM`. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator and then run histstat.
 
-### Requirements
-* `Python 2.x or 3.x`
-* `psutil`
-
 ### Install
+Simply run:
 ```
-sudo pip install psutil
-git clone https://github.com/vesche/histstat && cd histstat
+sudo pip install histstat
 ```
 
 ### Example Usage
 ```
-$ python histstat.py --help
-usage: histstat.py [-h] [-i INTERVAL] [-l LOG] [-p]
+$ histstat --help
+usage: histstat [-h] [-i INTERVAL] [-l LOG] [-p]
 
 history for netstat
 
@@ -28,7 +24,7 @@ optional arguments:
   -l LOG, --log LOG     log output to a text file
   -p, --prettify        prettify output
 
-$ sudo python histstat.py -p -l log.txt
+$ sudo histstat -p -l log.txt
 proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
 tcp   192.168.1.137   58822 172.217.1.206   443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
 tcp   192.168.1.137   60176 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox

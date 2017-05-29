@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
+#
 # histstat - history for netstat
 # https://github.com/vesche/histstat
+#
 
 import argparse
 import datetime
