@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 #
 # histstat - history for netstat
@@ -138,7 +139,11 @@ def main():
     prettify = args['prettify']
 
     histinit()
-    histmain(interval)
+
+    try:
+        histmain(interval)
+    except KeyboardInterrupt:
+        sys.exit(0)
 
 
 if __name__ == '__main__':
