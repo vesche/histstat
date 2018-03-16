@@ -6,6 +6,8 @@
 # https://github.com/vesche/histstat
 #
 
+from . import __version__
+
 import argparse
 import datetime
 import psutil
@@ -122,6 +124,8 @@ def get_parser():
                         default=False, type=str)
     parser.add_argument('-p', '--prettify', help='prettify output',
                         default=False, action='store_true')
+    parser.add_argument('-v', '--version', help='display the current version',
+                        default=False, action='store_true')
 
     return parser
 
@@ -131,6 +135,10 @@ def main():
     args = vars(parser.parse_args())
 
     interval = args['interval']
+
+    if args['version']:
+        print(__version__)
+        return
 
     global log
     log = args['log']
