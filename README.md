@@ -1,14 +1,13 @@
 # histstat
 
-This is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security analysts to easily view connections on a system **as they occur**. In a world filled with noisy computers, histstat can help someone quickly understand network connections that are happening on a system without having to dig into heaps of packet capture data. It will display useful information about network connections that utilities like netstat typically won't give you such as what time the connection was made, the exact command that created the connection, and the user that connection was made by. It can used to troubleshoot network issues, profile traffic on a system, and potentially find malicious activity.
+This is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security analysts to easily view connections on a system **as they occur**. It will display useful information about network connections that utilities like netstat typically won't give you such as what time the connection was made, the exact command that created the connection, and the user that connection was made by.
 
-**Note:** On Windows, detailed process information will not display unless you're running as `NT AUTHORITY\SYSTEM`. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator and then run histstat.
+**Note for Windows users:** Detailed process information will not display unless you're running as `NT AUTHORITY\SYSTEM`. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator and then run histstat.
 
 ### Install
-Simply run:
-```
-sudo pip install histstat
-```
+Linux: `$ sudo pip install histstat`
+
+Windows: `C:\>python -m pip install histstat`
 
 ### Example Usage
 ```
