@@ -1,6 +1,6 @@
 # histstat
 
-This is a cross-platform command line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security analysts to easily view connections on a system **as they occur**. It will display useful information about network connections that utilities like netstat typically won't give you such as what time the connection was made, the exact command that created the connection, and the user that connection was made by.
+This is a cross-platform command-line tool for obtaining live, rudimentary network connection data on a computer system. This tool was designed for network and security analysts to easily view connections on a system **as they occur**. It will display useful information about network connections that utilities like netstat typically won't give you such as what time the connection was made, the exact command that created the connection, and the user that connection was made by.
 
 **Note for Windows users:** Detailed process information will not display unless you're running as `NT AUTHORITY\SYSTEM`. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator and then run histstat.
 
@@ -12,7 +12,7 @@ Windows: `C:\>python -m pip install histstat`
 ### Example Usage
 ```
 $ histstat --help
-usage: histstat [-h] [-i INTERVAL] [-l LOG] [-p]
+usage: histstat [-h] [-i INTERVAL] [-l LOG] [-p] [-j] [-v]
 
 history for netstat
 
@@ -22,6 +22,8 @@ optional arguments:
                         specify update interval in seconds
   -l LOG, --log LOG     log output to a text file
   -p, --prettify        prettify output
+  -j, --json            json output
+  -v, --version         display the current version
 
 $ sudo histstat -p -l log.txt
 proto laddr           lport raddr           rport status      pid   pname        time     date     user         command

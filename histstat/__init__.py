@@ -8,4 +8,4 @@
 
 __author__ = 'Austin Jackson'
 __email__ = 'vesche@protonmail.com'
-__version__ = '1.0.1'
+__version__ = '1.1.0'
