@@ -11,7 +11,6 @@ import psutil
 import argparse
 import datetime
 
-from . import __version__
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
 if sys.platform.startswith('linux') or sys.platform == 'darwin':
@@ -24,6 +23,7 @@ else:
     print('Error: Platform unsupported.')
     sys.exit(1)
 
+__version__ = '1.1.1'
 
 PROTOCOLS = {
     (AF_INET,  SOCK_STREAM): 'tcp',
@@ -119,7 +119,8 @@ class Output:
             header += '(Not all process information could be determined, run' \
                     ' at a higher privilege level to see everything.)\n'
 
-        print(header)
+        if header:
+            print(header)
         if not self.json_out:
             self.process(FIELDS)
 

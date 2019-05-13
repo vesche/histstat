@@ -6,6 +6,7 @@
 # |  |  | |  |\    |  |  |  \    |  |  |  |  |  |  |  |
 # |__|__||____|\___|  |__|   \___|  |__|  |__|__|  |__|
 
+from .histstat import __version__
+
 __author__ = 'Austin Jackson'
 __email__ = 'vesche@protonmail.com'
-__version__ = '1.1.0'
