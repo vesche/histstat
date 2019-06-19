@@ -5,11 +5,11 @@ This is a cross-platform command-line tool for obtaining live, rudimentary netwo
 **Note for Windows users:** Detailed process information will not display unless you're running as `NT AUTHORITY\SYSTEM`. An easy way to drop into a system-level command prompt is to use PsExec from [SysInternals](https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx). Run `psexec -i -s cmd.exe` as Administrator and then run histstat.
 
 ### Install
-Linux: `$ sudo pip install histstat`
 
-Windows: `C:\>python -m pip install histstat`
+`pip install histstat`
 
 ### Example Usage
+
 ```
 $ histstat --help
 usage: histstat [-h] [-i INTERVAL] [-l LOG] [-p] [-j] [-v]
@@ -26,37 +26,18 @@ optional arguments:
   -v, --version         display the current version
 
 $ sudo histstat -p -l log.txt
-proto laddr           lport raddr           rport status      pid   pname        time     date     user         command
-tcp   192.168.1.137   58822 172.217.1.206   443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
-tcp   192.168.1.137   60176 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
-tcp   192.168.1.137   59798 45.58.74.36     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   40994 108.160.173.132 443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   40986 108.160.173.132 443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   41752 173.194.206.155 443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
-tcp   192.168.1.137   48396 198.41.209.142  443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   40978 108.160.173.132 443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   60130 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
-tcp   192.168.1.137   40194 45.58.70.36     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   32894 198.41.209.151  443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   60154 192.30.253.124  443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
-tcp   192.168.1.137   57808 45.58.70.4      443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   0.0.0.0         22    *               *     LISTEN      198   sshd         10:41:45 16-07-28 root         /usr/bin/sshd -D
-tcp   192.168.1.137   39732 199.16.156.6    443   ESTABLISHED 14896 firefox      10:41:45 16-07-28 vesche       firefox
-tcp   192.168.1.137   57816 45.58.70.4      443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   35508 104.16.107.25   443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   49674 198.41.208.122  443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   34076 162.125.4.1     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-udp   0.0.0.0         68    *               *     -           362   dhcpcd       10:41:45 16-07-28 root         dhcpcd -4 -q -t 30 -L wlp1s0
-tcp   192.168.1.137   49752 104.16.2.9      443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   192.168.1.137   40182 45.58.70.36     443   TIME_WAIT   -     -            10:41:45 16-07-28 -            -
-tcp   0.0.0.0         2002  *               *     LISTEN      31327 nc           10:42:03 16-07-28 vesche       nc -l -p 2002
-tcp   192.168.1.137   39600 10.4.0.11       22    ESTABLISHED 31975 ssh          10:42:59 16-07-28 vesche       ssh root@10.4.0.11
-tcp   192.168.1.137   39600 10.4.0.11       22    TIME_WAIT   -     -            10:43:05 16-07-28 -            -
-tcp   0.0.0.0         8080  *               *     LISTEN      32490 python2      10:43:49 16-07-28 root         python2 -m SimpleHTTPServer 8080
-tcp   192.168.1.137   8080  192.168.1.137   45162 TIME_WAIT   -     -            10:44:12 16-07-28 -            -
+date     time     proto laddr           lport raddr           rport status      user                 pid   pname                command
+21:18:44 19-06-18 tcp   0.0.0.0         22    *               *     LISTEN      root                 650   sshd                 /usr/bin/sshd -D
+21:18:44 19-06-18 udp   0.0.0.0         68    *               *     -           root                 647   dhcpcd               /usr/bin/dhcpcd -q -b
+21:18:51 19-06-18 tcp   0.0.0.0         8000  *               *     LISTEN      vesche               5435  python               python -m http.server
+21:19:11 19-06-18 tcp   0.0.0.0         1337  *               *     LISTEN      vesche               5602  ncat                 ncat -l -p 1337
+21:19:26 19-06-18 tcp   127.0.0.1       39246 *               *     LISTEN      vesche               5772  electron             /usr/lib/electron/electron --nolazy --inspect=39246 /usr/lib/code/out/bootstrap-fork --type=extensionHost
+21:19:28 19-06-18 tcp   10.13.37.114    43924 13.107.6.175    443   ESTABLISHED vesche               5689  code-oss             /usr/lib/electron/electron /usr/lib/code/code.js
+...
 ```
 
 ### Thanks
+
 Huge thanks to Giampaolo Rodola' (giampaolo) and all the contributers of [psutil](https://github.com/giampaolo/psutil) for the amazing open source library that this project relies upon completely.
 
 Also, thanks to gleitz and his project [howdoi](https://github.com/gleitz/howdoi), in my refactor of histstat I modeled my code around his command line tool as the code is exceptionally clean and readable.
