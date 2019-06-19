@@ -13,7 +13,7 @@ import datetime
 
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 
 PROTOCOLS = {
     (AF_INET,  SOCK_STREAM): 'tcp',
@@ -22,15 +22,9 @@ PROTOCOLS = {
     (AF_INET6, SOCK_DGRAM):  'udp6'
 }
 FIELDS = [
-    'proto', 'laddr', 'lport', 'raddr', 'rport', 'status', 'pid',
-    'pname', 'time', 'date', 'user', 'command'
-]
-FIELDS = [
     'date', 'time', 'proto', 'laddr', 'lport', 'raddr', 'rport', 'status',
     'user', 'pid', 'pname', 'command'
 ]
-P_FIELDS = '{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} {:<5} {:<20.20} ' \
-           '{:<8} {:<8} {:<20.20} {}'
 P_FIELDS = '{:<8} {:<8} {:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} ' \
            '{:<20.20} {:<5} {:<20.20} {}'
 
