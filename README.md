@@ -27,11 +27,11 @@ optional arguments:
 
 $ sudo histstat -p -l log.txt
 date     time     proto laddr           lport raddr           rport status      user                 pid   pname                command
-21:18:44 19-06-18 tcp   0.0.0.0         22    *               *     LISTEN      root                 650   sshd                 /usr/bin/sshd -D
-21:18:44 19-06-18 udp   0.0.0.0         68    *               *     -           root                 647   dhcpcd               /usr/bin/dhcpcd -q -b
-21:18:51 19-06-18 tcp   0.0.0.0         8000  *               *     LISTEN      vesche               5435  python               python -m http.server
-21:19:11 19-06-18 tcp   0.0.0.0         1337  *               *     LISTEN      vesche               5602  ncat                 ncat -l -p 1337
-21:19:26 19-06-18 tcp   127.0.0.1       39246 *               *     LISTEN      vesche               5772  electron             /usr/lib/electron/electron --nolazy --inspect=39246 /usr/lib/code/out/bootstrap-fork --type=extensionHost
+19-06-18 21:18:44 tcp   0.0.0.0         22    *               *     LISTEN      root                 650   sshd                 /usr/bin/sshd -D
+19-06-18 21:18:44 udp   0.0.0.0         68    *               *     -           root                 647   dhcpcd               /usr/bin/dhcpcd -q -b
+19-06-18 21:18:51 tcp   0.0.0.0         8000  *               *     LISTEN      vesche               5435  python               python -m http.server
+19-06-18 21:19:11 tcp   0.0.0.0         1337  *               *     LISTEN      vesche               5602  ncat                 ncat -l -p 1337
+19-06-18 21:19:26 tcp   127.0.0.1       39246 *               *     LISTEN      vesche               5772  electron             /usr/lib/electron/electron --nolazy --inspect=39246 /usr/lib/code/out/bootstrap-fork --type=extensionHost
 21:19:28 19-06-18 tcp   10.13.37.114    43924 13.107.6.175    443   ESTABLISHED vesche               5689  code-oss             /usr/lib/electron/electron /usr/lib/code/code.js
 ...
 ```
