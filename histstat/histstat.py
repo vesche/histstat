@@ -82,7 +82,7 @@ def process_conn(c):
         status = c.status
 
     return [
-        time[:8], date[2:], proto, laddr, lport, raddr, rport, status,
+        date[2:], time[:8], proto, laddr, lport, raddr, rport, status,
         user, pid, pname, command
     ]
 
