@@ -32,7 +32,7 @@ date     time     proto laddr           lport raddr           rport status      
 19-06-18 21:18:51 tcp   0.0.0.0         8000  *               *     LISTEN      vesche               5435  python               python -m http.server
 19-06-18 21:19:11 tcp   0.0.0.0         1337  *               *     LISTEN      vesche               5602  ncat                 ncat -l -p 1337
 19-06-18 21:19:26 tcp   127.0.0.1       39246 *               *     LISTEN      vesche               5772  electron             /usr/lib/electron/electron --nolazy --inspect=39246 /usr/lib/code/out/bootstrap-fork --type=extensionHost
-21:19:28 19-06-18 tcp   10.13.37.114    43924 13.107.6.175    443   ESTABLISHED vesche               5689  code-oss             /usr/lib/electron/electron /usr/lib/code/code.js
+19-06-18 21:19:28 tcp   10.13.37.114    43924 13.107.6.175    443   ESTABLISHED vesche               5689  code-oss             /usr/lib/electron/electron /usr/lib/code/code.js
 ...
 ```
 
