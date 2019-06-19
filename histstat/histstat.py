@@ -13,6 +13,27 @@ import datetime
 
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
+__version__ = '1.1.1'
+
+PROTOCOLS = {
+    (AF_INET,  SOCK_STREAM): 'tcp',
+    (AF_INET6, SOCK_STREAM): 'tcp6',
+    (AF_INET,  SOCK_DGRAM):  'udp',
+    (AF_INET6, SOCK_DGRAM):  'udp6'
+}
+FIELDS = [
+    'proto', 'laddr', 'lport', 'raddr', 'rport', 'status', 'pid',
+    'pname', 'time', 'date', 'user', 'command'
+]
+FIELDS = [
+    'date', 'time', 'proto', 'laddr', 'lport', 'raddr', 'rport', 'status',
+    'user', 'pid', 'pname', 'command'
+]
+P_FIELDS = '{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} {:<5} {:<20.20} ' \
+           '{:<8} {:<8} {:<20.20} {}'
+P_FIELDS = '{:<8} {:<8} {:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} ' \
+           '{:<20.20} {:<5} {:<20.20} {}'
+
 if sys.platform.startswith('linux') or sys.platform == 'darwin':
     PLATFORM = 'nix'
     from os import geteuid
@@ -22,19 +43,6 @@ elif sys.platform.startswith('win'):
 else:
     print('Error: Platform unsupported.')
     sys.exit(1)
-
-__version__ = '1.1.1'
-
-PROTOCOLS = {
-    (AF_INET,  SOCK_STREAM): 'tcp',
-    (AF_INET6, SOCK_STREAM): 'tcp6',
-    (AF_INET,  SOCK_DGRAM):  'udp',
-    (AF_INET6, SOCK_DGRAM):  'udp6'
-}
-FIELDS = ['proto', 'laddr', 'lport', 'raddr', 'rport', 'status', 'pid',
-          'pname', 'time', 'date', 'user', 'command']
-P_FIELDS = '{:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} {:<5} {:<20.20} ' \
-           '{:<8} {:<8} {:<20.20} {}'
 
 
 def histmain(interval):
@@ -51,12 +59,10 @@ def histmain(interval):
     # primary loop
     while True:
         time.sleep(interval)
-
         connections_B = psutil.net_connections()
         for c in connections_B:
             if c not in connections_A:
                 output.process(process_conn(c))
-
         connections_A = connections_B
 
 
@@ -76,13 +82,15 @@ def process_conn(c):
             pname, pid = psutil.Process(c.pid).name(), str(c.pid)
             user = psutil.Process(c.pid).username()
             command = ' '.join(psutil.Process(c.pid).cmdline())
-        except: pass # if process closes during processing
+        except:
+            pass # if process closes during processing
     if c.status != 'NONE':
         status = c.status
 
-    cfields = [proto, laddr, lport, raddr, rport, status, pid, pname,
-               time[:8], date[2:], user, command]
-    return cfields
+    return [
+        time[:8], date[2:], proto, laddr, lport, raddr, rport, status,
+        user, pid, pname, command
+    ]
 
 
 class Output:
@@ -94,7 +102,7 @@ class Output:
         self.prettify = prettify
 
         if self.prettify and self.json_out:
-            print('Error: Prettify output and JSON output cannot be used together.')
+            print('Error: Prettify and JSON output cannot be used together.')
             sys.exit(2)
 
         if self.log:
@@ -117,8 +125,7 @@ class Output:
 
         if not root_check:
             header += '(Not all process information could be determined, run' \
-                    ' at a higher privilege level to see everything.)\n'
-
+                      ' at a higher privilege level to see everything.)\n'
         if header:
             print(header)
         if not self.json_out:
@@ -132,7 +139,7 @@ class Output:
         else:
             line = '\t'.join(map(str, cfields))
 
-        # output
+        # stdout
         print(line)
         if self.log:
             self.file_handle.write(str(line) + '\n')
@@ -140,16 +147,26 @@ class Output:
 
 def get_parser():
     parser = argparse.ArgumentParser(description='history for netstat')
-    parser.add_argument('-i', '--interval', help='specify update interval in seconds',
-                        default=1, type=float)
-    parser.add_argument('-l', '--log', help='log output to a text file',
-                        default=None, type=str)
-    parser.add_argument('-p', '--prettify', help='prettify output',
-                        default=False, action='store_true')
-    parser.add_argument('-j', '--json', help='json output',
-                        default=False, action='store_true')
-    parser.add_argument('-v', '--version', help='display the current version',
-                        default=False, action='store_true')
+    parser.add_argument(
+        '-i', '--interval', help='specify update interval in seconds',
+        default=1, type=float
+    )
+    parser.add_argument(
+        '-l', '--log', help='log output to a text file',
+        default=None, type=str
+    )
+    parser.add_argument(
+        '-p', '--prettify', help='prettify output',
+        default=False, action='store_true'
+    )
+    parser.add_argument(
+        '-j', '--json', help='json output',
+        default=False, action='store_true'
+    )
+    parser.add_argument(
+        '-v', '--version', help='display the current version',
+        default=False, action='store_true'
+    )
     return parser
 
 
