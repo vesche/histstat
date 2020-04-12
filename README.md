@@ -6,7 +6,15 @@ This is a cross-platform command-line tool for obtaining live, rudimentary netwo
 
 ### Install
 
-`pip install histstat`
+*nix/macOS:
+```
+sudo pip install histstat
+```
+
+Windows (open cmd.exe as Administrator):
+```
+python -m pip install histstat
+```
 
 ### Example Usage
 

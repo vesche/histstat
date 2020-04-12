@@ -13,7 +13,7 @@ import datetime
 
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 
 PROTOCOLS = {
     (AF_INET,  SOCK_STREAM): 'tcp',
@@ -170,7 +170,7 @@ def main():
 
     if args['version']:
         print(__version__)
-        return
+        return 0
 
     interval = args['interval']
 

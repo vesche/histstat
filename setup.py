@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 
-import histstat
 from setuptools import setup
 
 setup(
     name='histstat',
     packages=['histstat'],
-    version=histstat.__version__,
+    version='1.1.5',
     description='History for netstat.',
     license='MIT',
     url='https://github.com/vesche/histstat',
-    author=histstat.__author__,
-    author_email=histstat.__email__,
+    author='Austin Jackson',
+    author_email='vesche@protonmail.com',
     entry_points={
         'console_scripts': [
             'histstat = histstat.histstat:main',
