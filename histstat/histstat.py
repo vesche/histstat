@@ -98,11 +98,11 @@ class Output:
 
         if self.quiet and not self.log:
             print('Error: Quiet mode must be used with log mode.')
-            sys.exit(2)
+            sys.exit(1)
 
         if self.prettify and self.json_out:
             print('Error: Prettify and JSON output cannot be used together.')
-            sys.exit(2)
+            sys.exit(1)
 
         if self.log:
             self.file_handle = open(self.log, 'a')
@@ -110,7 +110,7 @@ class Output:
                 print(f'Quiet mode enabled, see log file for results: {self.log}')
 
     def preflight(self):
-        header = ''
+        header = str()
         root_check = False
 
         if PLATFORM == 'nix':
@@ -119,7 +119,7 @@ class Output:
                 root_check = True
             elif sys.platform == 'darwin':
                 print('Error: histstat must be run as root on macOS.')
-                sys.exit(3)
+                sys.exit(1)
         elif PLATFORM == 'win':
             if windll.shell32.IsUserAnAdmin() == 0:
                 root_check = True
@@ -150,27 +150,33 @@ class Output:
 def get_parser():
     parser = argparse.ArgumentParser(description='history for netstat')
     parser.add_argument(
-        '-i', '--interval', help='specify update interval in seconds',
+        '-i', '--interval',
+        help='specify update interval in seconds',
         default=1, type=float
     )
     parser.add_argument(
-        '-l', '--log', help='log output to a text file',
+        '-j', '--json',
+        help='json output',
+        default=False, action='store_true'
+    )
+    parser.add_argument(
+        '-l', '--log',
+        help='log output to a file',
         default=None, type=str
     )
     parser.add_argument(
-        '-p', '--prettify', help='prettify output',
+        '-p', '--prettify',
+        help='prettify output',
         default=False, action='store_true'
     )
     parser.add_argument(
-        '-j', '--json', help='json output',
+        '-q', '--quiet',
+        help='quiet mode, do not output to stdout (for use with log mode)',
         default=False, action='store_true'
     )
     parser.add_argument(
-        '-q', '--quiet', help='quiet mode, do not output to stdout',
-        default=False, action='store_true'
-    )
-    parser.add_argument(
-        '-v', '--version', help='display the current version',
+        '-v', '--version',
+        help='display the current version',
         default=False, action='store_true'
     )
     return parser
