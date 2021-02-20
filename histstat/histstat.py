@@ -5,9 +5,11 @@ histstat, history for netstat
 https://github.com/vesche/histstat
 """
 
+import os
 import sys
 import time
 import psutil
+import hashlib
 import argparse
 import datetime
 
@@ -27,6 +29,7 @@ FIELDS = [
 ]
 P_FIELDS = '{:<8} {:<8} {:<5} {:<15.15} {:<5} {:<15.15} {:<5} {:<11} ' \
            '{:<20.20} {:<5} {:<20.20} {}'
+BUF_SIZE = 65536
 
 if sys.platform.startswith('linux') or sys.platform == 'darwin':
     PLATFORM = 'nix'
@@ -87,14 +90,30 @@ def process_conn(c):
     ]
 
 
+def hash_file(path):
+    """Hashes a file using MD5 and SHA256."""
+
+    md5_hash = hashlib.md5()
+    sha256_hash = hashlib.sha256()
+    with open(path, 'rb') as f:
+        while True:
+            data = f.read(BUF_SIZE)
+            if not data:
+                break
+            md5_hash.update(data)
+            sha256_hash.update(data)
+    return md5_hash.hexdigest(), sha256_hash.hexdigest()
+
+
 class Output:
     """Handles all output for histstat."""
 
-    def __init__(self, log, json_out, prettify, quiet):
+    def __init__(self, log, json_out, prettify, quiet, hash_mode):
         self.log = log
         self.json_out = json_out
         self.prettify = prettify
         self.quiet = quiet
+        self.hash_mode = hash_mode
 
         if self.quiet and not self.log:
             print('Error: Quiet mode must be used with log mode.')
@@ -109,8 +128,14 @@ class Output:
             if quiet:
                 print(f'Quiet mode enabled, see log file for results: {self.log}')
 
+        if self.hash_mode:
+            global FIELDS, P_FIELDS
+            FIELDS = FIELDS[:-1] + ['md5', 'sha256', 'command']
+            P_FIELDS = ' '.join(
+                P_FIELDS.split()[:-1] + ['{:<32}', '{:<64}', '{}']
+            )
+
     def preflight(self):
-        header = str()
         root_check = False
 
         if PLATFORM == 'nix':
@@ -124,15 +149,24 @@ class Output:
             if windll.shell32.IsUserAnAdmin() == 0:
                 root_check = True
 
+        # display netstat-esque privilege level header warning
         if not root_check:
-            header += '(Not all process information could be determined, run' \
-                      ' at a higher privilege level to see everything.)\n'
-        if header:
-            print(header)
+            print('(Not all process information could be determined, run' \
+                  ' at a higher privilege level to see everything.)\n')
+
+        # display column names
         if not self.json_out:
             self.process(FIELDS)
 
     def process(self, cfields):
+        if self.hash_mode:
+            path = cfields[-1].split()[0]
+            if os.path.isfile(path):
+                md5_hash, sha256_hash = hash_file(path)
+            else:
+                md5_hash, sha256_hash = str(), str()
+            cfields = cfields[:-1] + [md5_hash, sha256_hash, cfields[-1]]
+
         if self.prettify:
             line = P_FIELDS.format(*cfields)
         elif self.json_out:
@@ -171,12 +205,17 @@ def get_parser():
     )
     parser.add_argument(
         '-q', '--quiet',
-        help='quiet mode, do not output to stdout (for use with log mode)',
+        help='quiet mode, do not output to stdout (for use when logging)',
         default=False, action='store_true'
     )
     parser.add_argument(
         '-v', '--version',
         help='display the current version',
+        default=False, action='store_true'
+    )
+    parser.add_argument(
+        '--hash',
+        help='takes md5 and sha256 hashes of process files (warning: slow!)',
         default=False, action='store_true'
     )
     return parser
@@ -197,7 +236,8 @@ def main():
         log=args['log'],
         json_out=args['json'],
         prettify=args['prettify'],
-        quiet=args['quiet']
+        quiet=args['quiet'],
+        hash_mode=args['hash']
     )
 
     try:
