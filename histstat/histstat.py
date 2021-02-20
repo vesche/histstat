@@ -90,10 +90,15 @@ def process_conn(c):
 class Output:
     """Handles all output for histstat."""
 
-    def __init__(self, log, json_out, prettify):
+    def __init__(self, log, json_out, prettify, quiet):
         self.log = log
         self.json_out = json_out
         self.prettify = prettify
+        self.quiet = quiet
+
+        if self.quiet and not self.log:
+            print('Error: Quiet mode must be used with log mode.')
+            sys.exit(2)
 
         if self.prettify and self.json_out:
             print('Error: Prettify and JSON output cannot be used together.')
@@ -101,6 +106,8 @@ class Output:
 
         if self.log:
             self.file_handle = open(self.log, 'a')
+            if quiet:
+                print(f'Quiet mode enabled, see log file for results: {self.log}')
 
     def preflight(self):
         header = ''
@@ -134,7 +141,8 @@ class Output:
             line = '\t'.join(map(str, cfields))
 
         # stdout
-        print(line)
+        if not self.quiet:
+            print(line)
         if self.log:
             self.file_handle.write(str(line) + '\n')
 
@@ -155,6 +163,10 @@ def get_parser():
     )
     parser.add_argument(
         '-j', '--json', help='json output',
+        default=False, action='store_true'
+    )
+    parser.add_argument(
+        '-q', '--quiet', help='quiet mode, do not output to stdout',
         default=False, action='store_true'
     )
     parser.add_argument(
@@ -179,6 +191,7 @@ def main():
         log=args['log'],
         json_out=args['json'],
         prettify=args['prettify'],
+        quiet=args['quiet']
     )
 
     try:

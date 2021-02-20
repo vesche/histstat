@@ -49,3 +49,5 @@ date     time     proto laddr           lport raddr           rport status      
 Huge thanks to Giampaolo Rodola' (giampaolo) and all the contributers of [psutil](https://github.com/giampaolo/psutil) for the amazing open source library that this project relies upon completely.
 
 Also, thanks to gleitz and his project [howdoi](https://github.com/gleitz/howdoi), in my refactor of histstat I modeled my code around his command line tool as the code is exceptionally clean and readable.
+
+A big thanks to JavaScriptDude who has a [fantastic fork of histstat](https://github.com/JavaScriptDude/histstat) with many additional features, some of which have been implemented such as: quiet mode for logging, ...
