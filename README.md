@@ -20,7 +20,7 @@ python -m pip install histstat
 
 ```
 $ histstat --help
-usage: histstat [-h] [-i INTERVAL] [-l LOG] [-p] [-j] [-v]
+usage: histstat [-h] [-i INTERVAL] [-j] [-l LOG] [-p] [-q] [-v] [--hash]
 
 history for netstat
 
@@ -28,10 +28,12 @@ optional arguments:
   -h, --help            show this help message and exit
   -i INTERVAL, --interval INTERVAL
                         specify update interval in seconds
-  -l LOG, --log LOG     log output to a text file
-  -p, --prettify        prettify output
   -j, --json            json output
+  -l LOG, --log LOG     log output to a file
+  -p, --prettify        prettify output
+  -q, --quiet           quiet mode, do not output to stdout (for use when logging)
   -v, --version         display the current version
+  --hash                takes md5 and sha256 hashes of process files (warning: slow!)
 
 $ sudo histstat -p -l log.txt
 date     time     proto laddr           lport raddr           rport status      user                 pid   pname                command
