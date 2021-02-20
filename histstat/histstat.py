@@ -13,7 +13,7 @@ import datetime
 
 from socket import AF_INET, AF_INET6, SOCK_DGRAM, SOCK_STREAM
 
-__version__ = '1.1.5'
+__version__ = '1.2.0'
 
 PROTOCOLS = {
     (AF_INET,  SOCK_STREAM): 'tcp',
