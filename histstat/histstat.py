@@ -124,7 +124,7 @@ class Output:
             sys.exit(1)
 
         if self.log:
-            self.file_handle = open(self.log, 'a')
+            self.file_handle = open(self.log, 'a', encoding='utf-8')
             if quiet:
                 print(f'Quiet mode enabled, see log file for results: {self.log}')
 
